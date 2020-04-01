@@ -11,4 +11,4 @@ COPY static/Work-In-Progress.png /usr/src/app/static/Work-In-Progress.png
 
 EXPOSE 5000
 
-CMD ["python", "/usr/src/app/app.py"]
+CMD ["python3", "/usr/src/app/app.py"]
