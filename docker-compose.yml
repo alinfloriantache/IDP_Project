@@ -8,7 +8,7 @@ services:
       - "5000:5000"
     networks:
       - backend
-  db:
+  database:
     image: alinflorian81/idp_project_database
     environment:
       MYSQL_ROOT_PASSWORD: "shortpass10"

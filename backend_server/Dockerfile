@@ -1,5 +1,7 @@
 FROM alpine:edge
 
+WORKDIR /backend_server
+
 RUN apk add --update py-pip
 
 COPY requirements.txt /usr/src/app/
