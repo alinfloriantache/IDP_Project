@@ -1,15 +1,15 @@
 FROM alpine:edge
 
-WORKDIR /backend_server
+WORKDIR /usr/src/app/backend_server
 
 RUN apk add --update py-pip
 
-COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+COPY requirements.txt /usr/src/app/backend_server
+RUN pip install --no-cache-dir -r /usr/src/app/backend_server/requirements.txt
 
-COPY app.py /usr/src/app/
-COPY templates/index.html /usr/src/app/templates/index.html
-COPY static/Work-In-Progress.png /usr/src/app/static/Work-In-Progress.png
+COPY app.py /usr/src/app/backend_server
+COPY templates/index.html /usr/src/app/backend_server/templates/index.html
+COPY static/Work-In-Progress.png /usr/src/app/backend_server/static/Work-In-Progress.png
 
 EXPOSE 5000
 
