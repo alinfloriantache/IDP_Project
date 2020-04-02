@@ -1,8 +1,9 @@
-CREATE DATABASE IF NOT EXISTS `music_app_db`;
-USE `music_app_db`;
+CREATE DATABASE music_app_db;
+USE music_app_db;
 
-CREATE TABLE IF NOT EXISTS `songs` (
-	`id` bigint(11) UNSIGNED NOT NULL auto_increment COMMENT `Primary key`,
-	`title` varchar(30) NOT NULL COMMENT `Title of the song`,
-	`artists` varchar(50) NOT NULL COMMENT `Artists of the song`,
-) DEFAULT CHARSET=utf8;
+CREATE TABLE songs(
+	id bigint(11) NOT NULL AUTO_INCREMENT COMMENT "Primary key",
+	title varchar(30) COMMENT "Title of the song",
+	artists varchar(50) COMMENT "Artists of the song",
+	PRIMARY KEY (id)
+);
