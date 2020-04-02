@@ -2,6 +2,8 @@ version: "3"
 services:
   backend_app:
     image: alinflorian81/idp_project:latest
+    links:
+      - db
     deploy:
       replicas: 4
       resources:
