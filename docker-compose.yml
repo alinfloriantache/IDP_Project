@@ -3,7 +3,7 @@ services:
   backend_app:
     image: alinflorian81/idp_project_backend_server
     links:
-      - db
+      - database
     ports:
       - "5000:5000"
     networks:

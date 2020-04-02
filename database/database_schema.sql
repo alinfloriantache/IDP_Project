@@ -1,4 +1,4 @@
-CREATE DATABASE IF `music_app_db`;
+CREATE DATABASE IF NOT EXISTS `music_app_db`;
 USE `music_app_db`;
 
 CREATE TABLE IF NOT EXISTS `songs` (
