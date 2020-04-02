@@ -1,3 +1,6 @@
+CREATE DATABASE IF `music_app_db`;
+USE `music_app_db`;
+
 CREATE TABLE IF NOT EXISTS `songs` (
 	`id` bigint(11) UNSIGNED NOT NULL auto_increment COMMENT `Primary key`,
 	`title` varchar(30) NOT NULL COMMENT `Title of the song`,

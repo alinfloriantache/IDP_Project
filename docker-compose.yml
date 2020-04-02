@@ -1,39 +1,20 @@
 version: "3"
 services:
   backend_app:
-    image: alinflorian81/idp_project:latest
+    image: alinflorian81/idp_project_backend_server
     links:
       - db
-    deploy:
-      replicas: 4
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: 50M
-      restart_policy:
-        condition: on-failure
     ports:
-      - "8888:5000"
+      - "5000:5000"
     networks:
       - backend
   db:
-    image: mysql:latest
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: alinflorian81/idp_project_database
     environment:
-      MYSQL_DATABASE: "db"
-      MYSQL_USER: "api_admin"
-      MYSQL_PASSWORD: "ApiAdminPassword"
-      MYSQL_ROOT_PASSWORD: "R00Tpassw0rD"
-    ports:
-      - "3306:3306"
-    volumes:
-      - .docker/db_schema.sql:/docker-entrypoint-initdb.d/db_schema.sql
-      - my-db:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: "shortpass10"
+    ports: 
+      - "5001:3306"
     networks:
       - backend
-volumes:
-  my-db:
 networks:
   backend:
