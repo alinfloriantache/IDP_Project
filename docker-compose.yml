@@ -1,6 +1,6 @@
 version: "3"
 services:
-  backend_app:
+  backend_server:
     image: alinflorian81/idp_project_backend_server:latest
     links:
       - database
