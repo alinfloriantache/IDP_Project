@@ -13,4 +13,4 @@ COPY static/Work-In-Progress.png /usr/src/app/backend_server/static/Work-In-Prog
 
 EXPOSE 5000
 
-CMD ["python3", "/usr/src/app/app.py"]
+CMD ["python3", "/usr/src/app/backend_server/app.py"]

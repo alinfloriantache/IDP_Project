@@ -1,7 +1,7 @@
 version: "3"
 services:
   backend_app:
-    image: alinflorian81/idp_project_backend_server
+    image: alinflorian81/idp_project_backend_server:latest
     links:
       - database
     ports:
@@ -9,7 +9,7 @@ services:
     networks:
       - backend
   database:
-    image: alinflorian81/idp_project_database
+    image: alinflorian81/idp_project_database:latest
     environment:
       MYSQL_ROOT_PASSWORD: "shortpass10"
     ports: 

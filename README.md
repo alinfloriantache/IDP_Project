@@ -9,4 +9,7 @@
 * Music Library Updater (DBMS) - Manages the songs available in the app
 * Monitoring System - Monitors all transactions
 
-Each component has its own Docker Hub repository based on a folder from this repository.
+## Docker hub repositories
+
+* alinflorian81/idp_project_backend_server
+* alinflorian81/idp_project_database
