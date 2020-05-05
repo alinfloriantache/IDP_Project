@@ -1,13 +1,10 @@
 import flask, flask.views
-import os
-
-users = {"alin": "parola"}
+import utils
 
 
 class Login(flask.views.MethodView):
 	def get(self):
-		songs = os.listdir("static/music")
-		return flask.render_template("login.html", songs=songs)
+		return flask.render_template("login.html")
 
 	def post(self):
 		if "logout" in flask.request.form:
@@ -20,8 +17,16 @@ class Login(flask.views.MethodView):
 				return flask.redirect(flask.url_for("login"))
 		username = flask.request.form["username"]
 		passwd = flask.request.form["passwd"]
-		if username in users and users[username] == passwd:
+
+		conn = utils.get_db_connection()
+		cursor = conn.cursor()
+		cursor.execute("SELECT username, password FROM users WHERE uploader = 1 AND username = %s", (username, ))
+		result = cursor.fetchone()
+		if result and result[1] == passwd:
 			flask.session["username"] = username
 		else:
-			flask.flash("Username doesn't exist or incorect password!")
+			flask.flash("Username doesn't exist or incorrect password!")
+			conn.close()
+			return flask.redirect(flask.url_for("login"))
+		conn.close()
 		return flask.redirect(flask.url_for("uploader"))

@@ -18,6 +18,7 @@
 			<a href="#">My Playlists</a><br />
 			<a href="{{url_for('login')}}">Logout</a><br />
 			{% else %}
+			<a href="{{url_for('register')}}">Register</a></br />
 			<a href="{{url_for('login')}}">Login</a><br />
 			{% endif %}
 		</div>

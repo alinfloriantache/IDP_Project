@@ -12,16 +12,7 @@ def is_mp3_file(filename):
 class Uploader(flask.views.MethodView):
 	@utils.login_required
 	def get(self):
-		songs = os.listdir("static/music")
-
-		conn = utils.get_db_connection()
-		cursor = conn.cursor()
-		query = "SELECT * FROM songs".format(f.filename)
-		cursor.execute(query)
-		result = cursor.fetchall()
-		conn.close()
-
-		return flask.render_template("uploader.html", songs=songs, entries=flask.jsonify(result))
+		return flask.render_template("uploader.html")
 
 	@utils.login_required
 	def post(self):
@@ -30,8 +21,8 @@ class Uploader(flask.views.MethodView):
 			f.save(os.path.join(flask.current_app.config["UPLOAD_FOLDER"], secure_filename(f.filename)))
 			conn = utils.get_db_connection()
 			cursor = conn.cursor()
-			query = "INSERT INTO songs(name) VALUES ({0})".format(f.filename)
-			cursor.execute(query)
+			cursor.execute("INSERT INTO songs (name) VALUES (%s)", (secure_filename(f.filename), ))
+			conn.commit()
 			conn.close()
 
 			flask.flash("File uploaded succesfully!")

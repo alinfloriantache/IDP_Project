@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+	<h2>Register a new account!</h2>
+	<form action="{{url_for('register')}}" method="post">
+		<p>Username:<br />
+		<input type="text" name="username" /></p>
+		<p>Password:<br />
+		<input type="password" name="passwd" /></p>
+		<p><input type="submit" value="Submit" /></p>
+	</form>
+{% endblock %}

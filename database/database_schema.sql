@@ -31,3 +31,5 @@ CREATE TABLE playlistsongs(
     FOREIGN KEY (playlistid) REFERENCES playlists(id),
     FOREIGN KEY (songid) REFERENCES songs(id)
 );
+
+INSERT INTO users (username, password, uploader) VALUES ("admin", "admin", 1);

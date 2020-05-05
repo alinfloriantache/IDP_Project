@@ -22,4 +22,4 @@ def get_db_connection():
         'port': '3306',
         'database': 'music_app_db'
     }
-	return connection = mysql.connector.connect(**config)
+	return mysql.connector.connect(**config)
