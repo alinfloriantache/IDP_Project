@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+	<h2>HERE THERE WILL BE MUSIC!</h2>
+	<audio controls="controls" autoplay="autoplay"></audio>
+	<ul>
+		{% for song in songs %}
+			<li><a href="javascript:void(0);" onclick="changeSong('{{song}}')">{{song}}</a></li>
+		{% endfor %}
+	</ul>
+
+    <script type="text/javascript">
+    	function changeSong(song) {
+    		$('audio').attr('src', '/static/music/' + song);
+    	}
+    </script>
+{% endblock %}

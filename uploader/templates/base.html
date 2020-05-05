@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome!</title>
+		<link rel="stylesheet" type="text/css" href="/static/style.css">
+		<script type="text/javascript" src="/static/jquery-3.5.0.min.js"></script>
+	</head>
+	<body>
+		<div class="big-title">
+			<br /><br />
+			<h1>Welcome to the music app uploader!</h1>
+			<h4>[IDP Project 2020 - Tache Alin-Florian, 343C1]</h4>
+			{% if 'username' in session %}
+				<h2>Welcome back {{session['username']}}!</h2>
+				<h2>Add songs to the main music library here!</h2>
+				<form action="{{url_for('login')}}" method="post">
+						<input type="submit" name="logout" value="Logout" />
+				</form>
+			{% else %}
+				<h2>Please login with an admin account to upload music!</h2>
+			{% endif %}
+		</div>
+		<div class="content">
+			{% block body %}{% endblock %}
+		</div>
+		{% if get_flashed_messages() %}
+			<div class="flashed">
+				{% with messages = get_flashed_messages() %}
+					{% for message in messages %}
+						{{message}}
+					{% endfor %}
+				{% endwith %}
+			</div>
+		{% endif %}
+	</body>
+</html>

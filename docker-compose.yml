@@ -3,9 +3,10 @@ services:
   backend_server:
     image: alinflorian81/idp_project_backend_server:latest
     links:
+      - frontend_server
       - database
     ports:
-      - "5000:5000"
+      - "3000:5000"
     networks:
       - backend
   database:
@@ -16,5 +17,27 @@ services:
       - "5001:3306"
     networks:
       - backend
+      - upload
+  uploader:
+    image: alinflorian81/idp_project_uploader:latest
+    links:
+      - database
+      - frontend_server
+    ports:
+      - "4000:5000"
+    networks:
+      - upload
+  frontend_server:
+    image: alinflorian81/idp_project_frontend_server:latest
+    links:
+      - backend_server
+      - uploader
+    ports:
+      - "5000:5000"
+    networks:
+      - backend
+      - upload
+
 networks:
   backend:
+  upload:

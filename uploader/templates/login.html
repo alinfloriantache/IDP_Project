@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+	<br /><br /><br />
+	{% if 'username' in session %}
+		<p>Welcome back {{session['username']}}!</p>
+		<form action="{{url_for('login')}}" method="post">
+			<input type="submit" name="logout" value="Logout" />
+		</form>
+	{% else %}
+		<form action="{{url_for('login')}}" method="post">
+			<p>Username:<br />
+			<input type="text" name="username" /></p>
+			<p>Password:<br />
+			<input type="password" name="passwd" /></p>
+			<p><input type="submit" value="Submit" /></p>
+		</form>
+	{% endif %}
+{% endblock %}
