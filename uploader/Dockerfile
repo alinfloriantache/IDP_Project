@@ -15,6 +15,8 @@ COPY utils.py /usr/src/app/uploader
 COPY templates /usr/src/app/uploader/templates
 COPY static /usr/src/app/uploader/static
 
+RUN mkdir /usr/src/app/uploader/static/music
+
 EXPOSE 5000
 
 CMD ["python3", "/usr/src/app/uploader/app.py"]

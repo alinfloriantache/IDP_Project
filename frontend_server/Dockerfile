@@ -15,6 +15,8 @@ COPY utils.py /usr/src/app/frontend_server
 COPY templates /usr/src/app/frontend_server/templates
 COPY static /usr/src/app/frontend_server/static
 
+RUN mkdir /usr/src/app/frontend_server/static/music
+
 EXPOSE 5000
 
 CMD ["python3", "/usr/src/app/frontend_server/app.py"]
