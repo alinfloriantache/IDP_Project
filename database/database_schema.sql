@@ -27,6 +27,7 @@ CREATE TABLE playlistsongs(
 	id bigint(11) NOT NULL AUTO_INCREMENT,
 	playlistid bigint(11),
 	songid bigint(11),
+	PRIMARY KEY (id),
     FOREIGN KEY (playlistid) REFERENCES playlists(id),
     FOREIGN KEY (songid) REFERENCES songs(id)
 );
