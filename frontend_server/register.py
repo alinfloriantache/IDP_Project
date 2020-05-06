@@ -1,5 +1,5 @@
 import flask, flask.views
-import utils
+import requests
 
 
 class Register(flask.views.MethodView):
@@ -13,12 +13,8 @@ class Register(flask.views.MethodView):
 				flask.flash("Error: {0} is required!".format(r))
 				return flask.redirect(flask.url_for("register"))
 		username = flask.request.form["username"]
-		passwd = flask.request.form["passwd"]
+		password = flask.request.form["passwd"]
 
-		conn = utils.get_db_connection()
-		cursor = conn.cursor()
-		cursor.execute("INSERT INTO users (username, password, uploader) VALUES (%s, %s, 0)", (username, passwd))
-		conn.commit()
-		conn.close()
+		requests.post("http://backend_server:5000/register/", json={"username": username, "password": password})
 		flask.flash("Account successfully created!")
 		return flask.redirect(flask.url_for("login"))

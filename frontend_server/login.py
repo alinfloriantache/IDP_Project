@@ -1,5 +1,4 @@
 import flask, flask.views
-import utils
 import requests
 
 
@@ -17,9 +16,9 @@ class Login(flask.views.MethodView):
 				flask.flash("Error: {0} is required!".format(r))
 				return flask.redirect(flask.url_for("login"))
 		username = flask.request.form["username"]
-		passwd = flask.request.form["passwd"]
+		password = flask.request.form["passwd"]
 
-		response = requests.get("http://backend_server:5000/validate_login", json={"username": username, "password": passwd})
+		response = requests.get("http://backend_server:5000/validate_login/", json={"username": username, "password": password})
 		if response.status_code == requests.codes.ok:
 			flask.session["username"] = username
 		else:

@@ -20,6 +20,19 @@ def validate_login():
 		return {}, 401
 
 
+@app.route("/register/", methods=["POST"])
+def register():
+	username = flask.request.json["username"]
+	password = flask.request.json["password"]
+
+	conn = utils.get_db_connection()
+	cursor = conn.cursor()
+	cursor.execute("INSERT INTO users (username, password, uploader) VALUES (%s, %s, 0)", (username, password))
+	conn.commit()
+	conn.close()
+	return {}, 200
+
+
 @app.route("/music_library/", methods=["GET"])
 def music_library():
 	conn = utils.get_db_connection()
