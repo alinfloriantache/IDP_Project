@@ -4,12 +4,15 @@
 ## Components
 
 * Backend Server - Receives requests from the Frontend server and communicates with the Database
+* Frontend Server - User interface which communicates with the Backend Server
 * Database - Storage system
-* Frontent Server - User interface which communicates with the Backend Server
-* Music Library Updater (DBMS) - Manages the songs available in the app
-* Monitoring System - Monitors all transactions
+* Uploader - Service for uploading new songs in the app
+* Visualiser - Monitoring system
+* Cadvisro - Monitoring system
 
 ## Docker hub repositories
 
 * alinflorian81/idp_project_backend_server
+* alinflorian81/idp_project_frontend_server
 * alinflorian81/idp_project_database
+* alinflorian81/idp_project_uploader
