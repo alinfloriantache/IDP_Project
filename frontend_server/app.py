@@ -24,6 +24,7 @@ def page_not_found(error):
 @app.route("/get_song/<string:filename>/", methods=["GET"])
 def get_song(filename):
 	response = requests.get("http://uploader:5000/get_song/" + filename)
+	return "plm"
 	return response.content
 
 

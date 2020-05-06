@@ -9,16 +9,13 @@ services:
     networks:
       - backend
       - upload
-    deploy:
-      placement:
-        constraints: [node.role == manager]
   backend_server:
     image: alinflorian81/idp_project_backend_server:latest
     ports:
       - "3000:5000"
     networks:
-      - frontend
       - backend
+      - frontend
     deploy:
       restart_policy:
         condition: on-failure
@@ -29,6 +26,8 @@ services:
     networks:
       - upload
     deploy:
+      placement:
+        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
   frontend_server:
@@ -38,9 +37,9 @@ services:
     networks:
       - frontend
       - upload
-    links:
-      - "uploader"
     deploy:
+      placement:
+        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
   visualizer:
@@ -58,5 +57,5 @@ services:
       - upload
 networks:
   backend:
-  upload:
   frontend:
+  upload:
