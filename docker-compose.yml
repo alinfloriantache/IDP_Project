@@ -38,6 +38,8 @@ services:
     networks:
       - frontend
       - upload
+    links:
+      - "uploader"
     deploy:
       restart_policy:
         condition: on-failure
