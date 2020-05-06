@@ -32,7 +32,6 @@ class Uploader(flask.views.MethodView):
 			file = os.path.join(path, secure_filename(f.filename))
 			files = {"file": open(file, 'rb')}
 			response = requests.post("http://frontend_server:5000/upload_song/", files=files)
-			flask.flash(response.json())
 
 			flask.flash("File uploaded succesfully!")
 		else:
