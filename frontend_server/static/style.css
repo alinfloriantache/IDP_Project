@@ -50,3 +50,20 @@ div.nav a:hover {
 	background-color: white;
 	padding: 15px;
 }
+
+.player {
+	position: fixed;
+	bottom: 0px;
+	left: 10em;
+	right: 0px;
+	height: 8em;
+	background-color: #1E1F1B;
+	display: block;
+}
+
+audio {
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+	width: 100%;
+}

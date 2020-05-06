@@ -18,7 +18,10 @@ class Uploader(flask.views.MethodView):
 	def post(self):
 		f = flask.request.files["file"]
 		if is_mp3_file(f.filename):
-			f.save(os.path.join(flask.current_app.config["UPLOAD_FOLDER"], secure_filename(f.filename)))
+			path = os.path.join(flask.current_app.instance_path, flask.current_app.config["UPLOAD_FOLDER"])
+			if not os.path.isdir(path):
+				os.makedirs(path)
+			f.save(os.path.join(path, secure_filename(f.filename)))
 			conn = utils.get_db_connection()
 			cursor = conn.cursor()
 			cursor.execute("INSERT INTO songs (name) VALUES (%s)", (secure_filename(f.filename), ))

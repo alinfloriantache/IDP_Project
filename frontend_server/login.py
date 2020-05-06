@@ -1,5 +1,6 @@
 import flask, flask.views
 import utils
+import requests
 
 
 class Login(flask.views.MethodView):
@@ -18,13 +19,10 @@ class Login(flask.views.MethodView):
 		username = flask.request.form["username"]
 		passwd = flask.request.form["passwd"]
 
-		conn = utils.get_db_connection()
-		cursor = conn.cursor()
-		cursor.execute("SELECT username, password FROM users WHERE uploader = 0 AND username = %s", (username, ))
-		result = cursor.fetchone()
-		if result and result[1] == passwd:
+		response = requests.get("http://backend_server:5000/validate_login", json={"username": username, "password": passwd})
+		if response.status_code == requests.codes.ok:
 			flask.session["username"] = username
 		else:
 			flask.flash("Username doesn't exist or incorrect password!")
-		conn.close()
-		return flask.redirect(flask.url_for("login"))
+			return flask.redirect(flask.url_for("login"))
+		return flask.redirect(flask.url_for("music_library"))

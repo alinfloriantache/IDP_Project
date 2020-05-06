@@ -21,4 +21,4 @@ class Register(flask.views.MethodView):
 		conn.commit()
 		conn.close()
 		flask.flash("Account successfully created!")
-		return flask.redirect(flask.url_for("music_library"))
+		return flask.redirect(flask.url_for("login"))

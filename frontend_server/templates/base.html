@@ -31,5 +31,14 @@
 				{% endwith %}
 			</div>
 		{% endif %}
+		<div class="player">
+			<audio controls="controls" autoplay="autoplay"></audio>
+		</div>
+		
+		<script type="text/javascript">
+			function playSong(song){
+				$('audio').attr('src', 'http://uploader:5000/get_song/'+song);
+			}
+		</script>
 	</body>
 </html>

@@ -4,8 +4,9 @@ import os
 
 class Main(flask.views.MethodView):
 	def get(self, page="login"):
+		if "username" in flask.session:
+			page = "uploader"
 		page += ".html"
 		if os.path.isfile('templates/' + page):
-			songs = os.listdir("static/music")
-			return flask.render_template(page, songs=songs)
+			return flask.render_template(page)
 		flask.abort(404)
