@@ -1,5 +1,17 @@
 version: "3"
 services:
+  database:
+    image: alinflorian81/idp_project_database:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "shortpass10"
+    ports: 
+      - "2000:3306"
+    networks:
+      - backend
+      - upload
+    deploy:
+      placement:
+        constraints: [node.role == manager]
   backend_server:
     image: alinflorian81/idp_project_backend_server:latest
     ports:
@@ -7,21 +19,18 @@ services:
     networks:
       - frontend
       - backend
-  database:
-    image: alinflorian81/idp_project_database:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: "shortpass10"
-    ports: 
-      - "5001:3306"
-    networks:
-      - backend
-      - upload
+    deploy:
+      restart_policy:
+        condition: on-failure
   uploader:
     image: alinflorian81/idp_project_uploader:latest
     ports:
       - "4000:5000"
     networks:
       - upload
+    deploy:
+      restart_policy:
+        condition: on-failure
   frontend_server:
     image: alinflorian81/idp_project_frontend_server:latest
     ports:
@@ -29,7 +38,22 @@ services:
     networks:
       - frontend
       - upload
-
+    deploy:
+      restart_policy:
+        condition: on-failure
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - backend
+      - frontend
+      - upload
 networks:
   backend:
   upload:

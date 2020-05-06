@@ -1,4 +1,5 @@
 import flask, flask.views
+import requests
 
 #Website Views
 from main import Main
@@ -19,7 +20,14 @@ app.add_url_rule("/music_library/", view_func=MusicLibrary.as_view("music_librar
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return flask.render_template('404.html'), 404
+	return flask.render_template('404.html'), 404
+
+
+@app.route("/get_song/<string:filename>/", methods=["GET"])
+def get_song(filename):
+	response = requests.get("http://uploader:5000/get_song/" + filename)
+	return response.content
+
 
 app.debug = True
 app.run(host="0.0.0.0")
