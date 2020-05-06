@@ -55,6 +55,22 @@ services:
       - backend
       - frontend
       - upload
+  cadvisor:
+    image: google/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8000:8080"
+    networks:
+      - backend
+      - frontend
+      - upload
+    restart: always
+    deploy:
+      mode: global
 networks:
   backend:
   frontend:

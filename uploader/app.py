@@ -21,13 +21,5 @@ def page_not_found(error):
     return flask.render_template('404.html'), 404
 
 
-@app.route("/get_song/<string:filename>/", methods=["GET"])
-def get_song(filename):
-	path = os.path.join(flask.current_app.instance_path, flask.current_app.config["UPLOAD_FOLDER"])
-	if not os.path.isdir(path):
-		os.makedirs(path)
-	return flask.send_from_directory(path, filename, as_attachment=True)
-
-
 app.debug = True
 app.run(host="0.0.0.0")

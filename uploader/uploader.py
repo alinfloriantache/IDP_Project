@@ -1,6 +1,7 @@
 import flask
 import os
 import utils
+import requests
 
 from werkzeug.utils import secure_filename
 
@@ -27,6 +28,11 @@ class Uploader(flask.views.MethodView):
 			cursor.execute("INSERT INTO songs (name) VALUES (%s)", (secure_filename(f.filename), ))
 			conn.commit()
 			conn.close()
+
+			file = os.path.join(path, secure_filename(f.filename))
+			files = {"file": open(file, 'rb')}
+			response = requests.post("http://frontend_server:5000/upload_song/", files=files)
+			flask.flash(response.json())
 
 			flask.flash("File uploaded succesfully!")
 		else:

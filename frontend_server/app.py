@@ -1,4 +1,5 @@
 import flask, flask.views
+import os
 import requests
 
 #Website Views
@@ -9,6 +10,8 @@ from music_library import MusicLibrary
 
 app = flask.Flask(__name__)
 app.secret_key = "most_secretKey_ever"
+app.config["UPLOAD_FOLDER"] = "static/music"
+app.config["MAX_CONTENT_PATH"] = 16 * 1024 * 1024
 
 app.add_url_rule("/", view_func=Main.as_view("main"), methods=["GET"])
 app.add_url_rule("/<page>/", view_func=Main.as_view("page"), methods=["GET"])
@@ -21,10 +24,14 @@ def page_not_found(error):
 	return flask.render_template('404.html'), 404
 
 
-# @app.route("/get_song/<string:filename>/", methods=["GET"])
-# def get_song(filename):
-# 	response = requests.get("http://uploader:5000/get_song/" + filename)
-# 	return response.content
+@app.route("/upload_song/", methods=["POST"])
+def upload_song():
+	f = flask.request.files["file"]
+	path = os.path.join(flask.current_app.root_path, flask.current_app.config["UPLOAD_FOLDER"])
+	if not os.path.isdir(path):
+		os.makedirs(path)
+	f.save(os.path.join(path, f.filename))
+	return {}, 200
 
 
 app.debug = True
