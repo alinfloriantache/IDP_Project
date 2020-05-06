@@ -37,7 +37,10 @@
 		
 		<script type="text/javascript">
 			function playSong(song){
-				$('audio').attr('src', 'http://localhost:5000/get_song/' + song);
+				$.getJSON("https://api.ipify.org?format=json", 
+					function(data) {  
+						$('audio').attr('src', 'http://' + data.ip + ':4000/get_song/' + song);
+        			})
 			}
 		</script>
 	</body>
