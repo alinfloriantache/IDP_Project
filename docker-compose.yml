@@ -26,8 +26,6 @@ services:
     networks:
       - upload
     deploy:
-      placement:
-        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
   frontend_server:
@@ -38,8 +36,6 @@ services:
       - frontend
       - upload
     deploy:
-      placement:
-        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
   visualizer:
